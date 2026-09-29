@@ -1,7 +1,12 @@
-import Image from "next/image";
+import Banner from "./homepage/Banner";
 
 export default function Home() {
   return (
-    <h1>Welcome to the Health & Fit Logs</h1>
+    <div>
+
+      <Banner />
+
+      <h1>Welcome to the Health & Fit Logs</h1>
+    </div>
   );
 }
