@@ -1,12 +1,14 @@
 import Banner from "./homepage/Banner";
+import Library from "./homepage/Library";
 
 export default function Home() {
   return (
     <div>
 
       <Banner />
+      <Library />
 
-      <h1>Welcome to the Health & Fit Logs</h1>
+      
     </div>
   );
 }
