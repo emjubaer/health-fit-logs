@@ -1,7 +1,5 @@
-import React from 'react';
 import { IExercise } from '../types/exerciseTypes';
 import ExerciseCard from '../components/shared/ExerciseCard';
-
 
 const getLibraryData = async () => {
     try {
@@ -18,7 +16,7 @@ const Library = async () => {
     const exercisesData: IExercise[] = (await getLibraryData()) || [];
 
     return (
-        <section className="bg-[#0d0e12] py-12 px-4 sm:px-6">
+        <section id="library" className="bg-[#0d0e12] py-12 px-4 sm:px-6">
             <div className="max-w-7xl mx-auto space-y-8">
                 
                 {/* Header */}
