@@ -2,21 +2,38 @@
 
 import { CalendarPlus } from 'lucide-react';
 import { IExercise } from '@/app/types/exerciseTypes';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
+import { WorkoutsContext } from '@/app/context/WorkoutsContext';
 
 interface AddToPlanButtonProps {
     workout: IExercise;
 }
 
 const AddToPlanButton = ({ workout }: AddToPlanButtonProps) => {
+
+    const { todayPlan, setTodayPlan } = useContext(WorkoutsContext);
+
     const handleAddToPlan = () => {
-        const existing = JSON.parse(localStorage.getItem('my_plan') || '[]');
-        if (!existing.some((item: IExercise) => item.id === workout.id)) {
-            localStorage.setItem('my_plan', JSON.stringify([...existing, workout]));
-            window.dispatchEvent(new Event('storage_updated'));
-            alert("Added to today's plan!");
-        } else {
-            alert("Already in today's plan!");
+
+        if (todayPlan.some((item: IExercise) => item.id === workout.id)) {
+            toast.info("Already in today's plan!");
+            return;
         }
+        setTodayPlan([...todayPlan, workout]);
+        toast.success("Added to today's plan!");
+        // console.log("Adding to today's plan:", todayPlan);
+
+
+
+        // const existing = JSON.parse(localStorage.getItem('my_plan') || '[]');
+        // if (!existing.some((item: IExercise) => item.id === workout.id)) {
+        //     localStorage.setItem('my_plan', JSON.stringify([...existing, workout]));
+        //     window.dispatchEvent(new Event('storage_updated'));
+        //     alert("Added to today's plan!");
+        // } else {
+        //     alert("Already in today's plan!");
+        // }
     };
 
     return (
