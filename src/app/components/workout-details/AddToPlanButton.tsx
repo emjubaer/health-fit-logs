@@ -20,6 +20,7 @@ const AddToPlanButton = ({ workout }: AddToPlanButtonProps) => {
             toast.info("Already in today's plan!");
             return;
         }
+        
         setTodayPlan([...todayPlan, workout]);
         toast.success("Added to today's plan!");
         // console.log("Adding to today's plan:", todayPlan);

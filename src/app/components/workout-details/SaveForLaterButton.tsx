@@ -2,21 +2,34 @@
 
 import { Bookmark } from 'lucide-react';
 import { IExercise } from '@/app/types/exerciseTypes';
+import { WorkoutsContext } from '@/app/context/WorkoutsContext';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 interface SaveForLaterButtonProps {
     workout: IExercise;
 }
 
 const SaveForLaterButton = ({ workout }: SaveForLaterButtonProps) => {
+    const { savedWorkouts, setSavedWorkouts } = useContext(WorkoutsContext);
     const handleSaveForLater = () => {
-        const existing = JSON.parse(localStorage.getItem('saved_workouts') || '[]');
-        if (!existing.some((item: IExercise) => item.id === workout.id)) {
-            localStorage.setItem('saved_workouts', JSON.stringify([...existing, workout]));
-            window.dispatchEvent(new Event('storage_updated'));
-            alert("Saved for later!");
-        } else {
-            alert("Already saved!");
+
+        if (savedWorkouts.some((item: IExercise) => item.id === workout.id)) {
+            toast.info("Already saved for later!");
+            return;
         }
+
+        setSavedWorkouts([...savedWorkouts, workout]);
+        toast.success("Saved for later!");
+
+        // const existing = JSON.parse(localStorage.getItem('saved_workouts') || '[]');
+        // if (!existing.some((item: IExercise) => item.id === workout.id)) {
+        //     localStorage.setItem('saved_workouts', JSON.stringify([...existing, workout]));
+        //     window.dispatchEvent(new Event('storage_updated'));
+        //     alert("Saved for later!");
+        // } else {
+        //     alert("Already saved!");
+        // }
     };
 
     return (

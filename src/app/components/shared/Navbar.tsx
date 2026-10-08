@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; 
 import logo from '@/assets/logo.png';
+import { WorkoutsContext } from '@/app/context/WorkoutsContext';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname(); 
+
+    //Context API
+    const { todayPlan, savedWorkouts } = useContext(WorkoutsContext);
 
     const isActive = (path: string) => pathname === path;
 
@@ -55,13 +59,13 @@ const Navbar = () => {
                     <div className="flex items-center gap-2">
                         <span>Plan</span>
                         <span className="bg-[#ccff00] text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                            0
+                            {todayPlan.length > 0 ? todayPlan.length : 0}
                         </span>
                     </div>
                     <div className="flex items-center gap-2">
                         <span>Saved</span>
                         <span className="bg-[#1f242d] text-gray-300 border border-gray-700 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                            0
+                            {savedWorkouts.length > 0 ? savedWorkouts.length : 0}
                         </span>
                     </div>
                 </div>
@@ -72,13 +76,13 @@ const Navbar = () => {
                         <div className="flex items-center gap-1">
                             <span>Plan</span>
                             <span className="bg-[#ccff00] text-black font-bold rounded-full w-4 h-4 text-[10px] flex items-center justify-center">
-                                0
+                               {todayPlan.length > 0 ? todayPlan.length : 0}
                             </span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span>Saved</span>
                             <span className="bg-[#1f242d] text-gray-300 border border-gray-700 font-bold rounded-full w-4 h-4 text-[10px] flex items-center justify-center">
-                                0
+                              {savedWorkouts.length > 0 ? savedWorkouts.length : 0}
                             </span>
                         </div>
                     </div>
@@ -131,13 +135,13 @@ const Navbar = () => {
                         <div className="flex items-center gap-2">
                             <span>Plan</span>
                             <span className="bg-[#ccff00] text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                                0
+                                {todayPlan.length > 0 ? todayPlan.length : 0}
                             </span>
                         </div>
                         <div className="flex items-center gap-2">
                             <span>Saved</span>
                             <span className="bg-[#1f242d] text-gray-300 border border-gray-700 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                                0
+                              {savedWorkouts.length > 0 ? savedWorkouts.length : 0}
                             </span>
                         </div>
                     </div>
