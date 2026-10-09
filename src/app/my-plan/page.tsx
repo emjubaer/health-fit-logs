@@ -59,22 +59,6 @@ const MyPlanPage = () => {
     });
 
 
-    // Remove workout
-    const handleRemove = (id: string | number) => {
-
-        // Later connect this with your Context function
-    };
-
-
-    // Mark workout as done
-    const handleMarkDone = (id: string | number) => {
-
-        console.log("Workout completed:", id);
-
-        // Later connect this with your Context function
-    };
-
-
     return (
         <main className="bg-[#0d0e12] min-h-screen py-8 md:py-12 px-4 sm:px-6">
 
@@ -229,6 +213,7 @@ const MyPlanPage = () => {
                                 key={workout.id}
                                 workout={workout}
                                 showMarkDone={activeTab === "today"}
+                                activeTab={activeTab}
                                 onRemove={removeWorkoutFromSaved}
                                 onMarkDone={markWorkoutAsDone}
                             />

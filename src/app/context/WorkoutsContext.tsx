@@ -32,9 +32,12 @@ const WorkoutsProvider = ({children}: {children: ReactNode}) => {
         toast.success("Workout marked as done!");
     }
 
-    const removeWorkoutFromSaved = (id: number | string) => {    
+    const removeWorkoutFromSaved = (id: number | string, activeTab: "today" | "saved") => {   
+        activeTab === "today" ? setTodayPlan(prevPlan => prevPlan.filter(workout => workout.id !== id)) :
         setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
-        toast.warning("Workout removed from saved workouts.");
+        
+        // setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
+        toast.warning("Workout removed.");
     };
 
     const sharedData = {

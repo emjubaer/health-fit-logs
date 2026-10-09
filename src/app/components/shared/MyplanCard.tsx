@@ -6,20 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { IExercise } from "@/app/types/exerciseTypes";
 
-interface Workout {
-    id: string | number;
-    name: string;
-    category: string;
-    equipment: string;
-    duration: number;
-    caloriesBurned: number;
-    rating: number;
-    image: string;
-}
-
 interface WorkoutCardProps {
     workout: IExercise;
-    onRemove?: (id: string | number) => void;
+    activeTab: "today" | "saved";
+    onRemove?: (id: string | number, activeTab: "today" | "saved") => void;
     onMarkDone?: (id: string | number) => void;
     showMarkDone?: boolean;
 }
@@ -28,6 +18,7 @@ const MyPlanCard = ({
     workout,
     onRemove,
     onMarkDone,
+    activeTab,
     showMarkDone = false,
 }: WorkoutCardProps) => {
     return (
@@ -90,16 +81,14 @@ const MyPlanCard = ({
                     </button>
                 )}
 
-                {onRemove && (
-                    <button
-                        onClick={() => onRemove(workout.id)}
-                        className="text-gray-500 hover:text-white text-lg px-1 transition"
-                        aria-label={`Remove ${workout.name}`}
-                    >
-                        ×
-                    </button>
-                )}
-
+                <button
+                    onClick={() => onRemove?.(workout.id, activeTab)}
+                    className="text-gray-500 hover:text-white text-lg px-1 transition"
+                    aria-label={`Remove ${workout.name}`}
+                >
+                    ×
+                </button>
+                
             </div>
         </div>
     );
