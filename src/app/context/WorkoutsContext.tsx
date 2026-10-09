@@ -9,7 +9,7 @@ interface WorkoutsContextType {
     savedWorkouts: IExercise[];
     setSavedWorkouts: React.Dispatch<React.SetStateAction<IExercise[]>>;
     markWorkoutAsDone: (id: number | string) => void;
-    removeWorkoutFromSaved: (id: number | string) => void;
+    removeWorkoutFromSaved: (id: number | string, activeTab: "today" | "saved") => void;
 }
 
 export const WorkoutsContext = createContext<WorkoutsContextType>({
@@ -32,9 +32,9 @@ const WorkoutsProvider = ({children}: {children: ReactNode}) => {
         toast.success("Workout marked as done!");
     }
 
-    const removeWorkoutFromSaved = (id: number | string, activeTab: "today" | "saved") => {   
-        activeTab === "today" ? setTodayPlan(prevPlan => prevPlan.filter(workout => workout.id !== id)) :
-        setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
+    const removeWorkoutFromSaved = (id: number | string, activeTab: "today" | "saved") =>  {   
+       return activeTab === "today" ? setTodayPlan(prevPlan => prevPlan.filter(workout => workout.id !== id))
+        : setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
         
         // setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
         toast.warning("Workout removed.");
