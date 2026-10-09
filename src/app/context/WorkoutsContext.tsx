@@ -33,11 +33,13 @@ const WorkoutsProvider = ({children}: {children: ReactNode}) => {
     }
 
     const removeWorkoutFromSaved = (id: number | string, activeTab: "today" | "saved") =>  {   
-       return activeTab === "today" ? setTodayPlan(prevPlan => prevPlan.filter(workout => workout.id !== id))
-        : setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
-        
+      if (activeTab === "today") {
+        setTodayPlan(prevPlan => prevPlan.filter(workout => workout.id !== id));
+      } else {
+        setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
+      }
+      toast.warning("Workout removed.");
         // setSavedWorkouts(prevSaved => prevSaved.filter(workout => workout.id !== id));
-        toast.warning("Workout removed.");
     };
 
     const sharedData = {
