@@ -51,10 +51,6 @@ const MyPlanCard = ({
                     {workout.name}
                 </h3>
 
-                <p className="text-gray-500 text-xs mt-1">
-                    {workout.category}
-                </p>
-
                 <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-300">
 
                     <span className="flex items-center gap-1">
